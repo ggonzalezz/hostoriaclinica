@@ -1,6 +1,6 @@
 <?php
 
-header('Location: views/index.php');
+header('Location: login/index.php');
 
 
 ?>

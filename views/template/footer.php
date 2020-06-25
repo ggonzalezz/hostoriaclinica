@@ -53,6 +53,9 @@
     
     <!-- AdminLTE for demo purposes -->
     <script src="../plantilla/dist/js/demo.js"></script>
+
+    <!--=======================================ALERTAS JAVASCRIOT==========================================-->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </body>
 
 </html>
