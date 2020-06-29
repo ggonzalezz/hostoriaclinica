@@ -36,6 +36,8 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
     <link rel="stylesheet" href="../plantilla/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="../plantilla/plugins/summernote/summernote-bs4.min.css">
+    <!-- Datatables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css"/>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
