@@ -55,7 +55,11 @@
     <script src="../plantilla/dist/js/demo.js"></script>
 
     <!--=======================================ALERTAS JAVASCRIOT==========================================-->
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    
+
+      <!-- Datatables -->
+      <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js"></script>
 </body>
 
 </html>

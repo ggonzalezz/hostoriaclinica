@@ -16,7 +16,7 @@
         <div class="card-body">
             <font style="vertical-align: inherit;">
                 <font style="vertical-align: inherit;">
-                    Contenido Usuario
+                    
                 </font>
             </font>
         </div>

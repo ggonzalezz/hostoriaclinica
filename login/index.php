@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(isset($_SESSION['S_IDUSUARIO'])){
+	header('Location: ../views/index.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -32,7 +40,7 @@
 	
 	<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 		<div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
-			<form class="login100-form validate-form">
+			<div class="login100-form validate-form">
 				<span class="login100-form-title p-b-37">
 					Iniciar Sesión 
 				</span>
@@ -52,7 +60,7 @@
 					</a>
 				</div>
 				<div class="container-login100-form-btn">
-					<button class="login100-form-btn">
+					<button class="login100-form-btn" onclick="verificarUsuario()">
 					Iniciar sesión
 					</button>
 				</div>
@@ -73,8 +81,8 @@
 					</a>
 				</div>
 
-			</form>
-
+			
+				</div>
 			
 		</div>
 	</div>
@@ -101,6 +109,9 @@
 	<script src="js/main.js"></script>
 <!--=======================================ALERTAS JAVASCRIOT==========================================-->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<!--=======================================JS USUARIO==========================================-->
+	<script src="../js/usuario.js"></script>
+	
 </body>
 <script>
 // foco a ingreso usuario
