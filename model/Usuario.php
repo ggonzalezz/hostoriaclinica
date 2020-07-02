@@ -58,7 +58,15 @@
                 $this->conexion->cerrar();
             }
         }
-     
+        ///Actualizar estado del usuario
+        function modificarEstadoUsuario($idusuario, $estatus){
+            $sql = "call sp_modificar_estadus_usuario('$idusuario','$estatus')";
+            if($consulta = $this->conexion->conexion->query($sql)){
+                return 1;
+            }else{
+                return 0;
+            }
+        }
 
     }
 

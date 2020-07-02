@@ -95,10 +95,10 @@ function listar_usuario() {
             {
                 "data": "estadousu",
                 render: function (data, type, row) {
-                    if (data=='ACTIVO') {
-                        return "<span class='badge badge-success'>"+data+"</span>";
+                    if (data == 'ACTIVO') {
+                        return "<span class='badge badge-success'>" + data + "</span>";
                     } else {
-                        return "<span class='badge badge-danger'>"+data+"</span>";
+                        return "<span class='badge badge-danger'>" + data + "</span>";
                     }
                 }
             },
@@ -116,6 +116,78 @@ function listar_usuario() {
         filterColumn($(this).parents('tr').attr('data-column'));
     });
 
+}
+//manejo del estatus para desactivar
+// se utiliza la clase desactivar 
+$('#tabla_usuario').on('click', '.desactivar', function () {
+    var data = table.row($(this).parents('tr')).data();
+    if (table.row(this).child.isShown()) {
+        var data = table.row(this).data();
+    }
+
+
+    Swal.fire({
+        title: 'Desea desactivar el usuario?',
+        text: "Al desactivarlo le restringe el acceso al sistema!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Desctivar!'
+    }).then((result) => {
+        if (result.value) {
+            actualizar_estado(data.idusuario, 'INACTIVO')
+        }
+    })
+})
+//manejo del estatus para activarlo
+// se utiliza la clase activarlo 
+$('#tabla_usuario').on('click', '.activar', function () {
+    var data = table.row($(this).parents('tr')).data();
+    if (table.row(this).child.isShown()) {
+        var data = table.row(this).data();
+    }
+
+
+    Swal.fire({
+        title: 'Desea Activar el usuario?',
+        text: "Al activarlo le otorga acceso al sistema!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Activar!'
+    }).then((result) => {
+        if (result.value) {
+            actualizar_estado(data.idusuario, 'ACTIVO')
+        }
+    })
+})
+//actualizar estado del usuario
+function actualizar_estado(idusuario, estatus) {
+    var mensaje = "";
+    if(estatus == 'INACTIVO'){
+        mensaje = "desactivado";
+    }else{
+        mensaje = "activo";
+    }
+    $.ajax({
+        "url": "../controller/usuario/modificar_estatus_usuario.php",
+        type: 'POST',
+        data: {
+            idusuario: idusuario,
+            estatus: estatus
+        }
+    }).done(function (resp) {
+        alert(resp);
+        if (resp > 0) {
+            Swal.fire("Mensaje de Confirmacion", "Usuario "+mensaje+" con exito", 
+            "success")
+            .then((value) => {
+                table.ajax.reload();
+            });
+        }
+    })
 }
 
 
@@ -180,7 +252,7 @@ function registrar_usuario() {
                     limpiarRegistros();
                     table.ajax.reload();
                 });
-            }else{
+            } else {
                 Swal.fire("Mensaje de Error", "Lo sentimos el nombre del usuario ya esta en la base de datos", "error");
             }
         } else {
@@ -189,7 +261,7 @@ function registrar_usuario() {
     })
 }
 
-function limpiarRegistros(){
+function limpiarRegistros() {
     $("#txt_usu").val("");
     $("#txt_con1").val("");
     $("#txt_con2").val("");

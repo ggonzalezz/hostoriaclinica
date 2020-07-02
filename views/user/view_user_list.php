@@ -27,7 +27,7 @@
                     <button class="btn btn-danger" style="width:100%" onclick="abrirModalRegistro()"><i class="glyphicon glyphicon-plus"></i>Nuevo Registro</button>
                 </div>
             </div>
-            <table id="tabla_usuario" class="display nowrap dataTable dtr-inline collapsed" style="width:100%">
+            <table id="tabla_usuario" class="display responsive nowrap" style="width:100%">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -105,6 +105,7 @@
 <!-- Fin del Modal -->
 <script>
     $(document).ready(function() {
+       
         //llamado de funcion para listar usuario
         listar_usuario();
         //llamando funcion para listar rol
