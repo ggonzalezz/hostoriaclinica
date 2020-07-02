@@ -34,6 +34,31 @@
                 $this->conexion->cerrar();
             }
         }
+        //listar combo rol
+        
+        function listar_combo_rol(){
+            $sql = "call sp_listar_combo_rol()";
+            $arreglo = array();
+            if($consulta = $this->conexion->conexion->query($sql)){
+                while($consulta_VU = mysqli_fetch_array($consulta)){
+                   $arreglo[]=$consulta_VU;
+                }
+                return $arreglo;
+                $this->conexion->cerrar();
+            }
+        }
+        ///insertar usuario
+        function registrarUsuario($usuario, $contra,$sexo, $rol){
+            $sql = "call sp_registrar_usuario('$usuario','$contra','$sexo','$rol')";
+            if($consulta = $this->conexion->conexion->query($sql)){
+                if($row = mysqli_fetch_array($consulta)){
+                    return $id= trim($row[0]);
+                }
+               
+                $this->conexion->cerrar();
+            }
+        }
+     
 
     }
 

@@ -37,7 +37,18 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
     <!-- summernote -->
     <link rel="stylesheet" href="../plantilla/plugins/summernote/summernote-bs4.min.css">
     <!-- Datatables -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+  
+    <!-- Select 2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    
+    
+
+    <style>
+        .swal2-popup {
+            font-size: 1.6rem !important;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -85,7 +96,7 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
                         <li class="user-header">
                             <img src="../plantilla/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                             <p>
-                            <?php echo  $_SESSION['S_NOMBREUSU']; ?>
+                                <?php echo  $_SESSION['S_NOMBREUSU']; ?>
                                 <small>Member since Nov. 2012</small>
                             </p>
                         </li>

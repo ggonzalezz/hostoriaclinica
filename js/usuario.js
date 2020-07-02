@@ -63,9 +63,9 @@ function verificarUsuario() {
         }
     })
 }
-
+var table;
 function listar_usuario() {
-    var table = $("#tabla_usuario").DataTable({
+    table = $("#tabla_usuario").DataTable({
         "ordering": false,
         "paging": false,
         "searching": { "regex": true },
@@ -86,23 +86,23 @@ function listar_usuario() {
                 "data": "sexousu",
                 render: function (data, type, row) {
                     if (data == 'M') {
-                        return "MASCULINO";
+                        return "<span class='badge badge-primary'>MASCULINO</span>";
                     } else {
-                        return "FEMINO";
+                        return "<span class='badge badge-warning'>FEMENINO</span>";;
                     }
                 }
             },
             {
                 "data": "estadousu",
                 render: function (data, type, row) {
-                    if (data == 'ACTIVO') {
-                        return "<span class='label label-success'>" + data + "</span>";
+                    if (data=='ACTIVO') {
+                        return "<span class='badge badge-success'>"+data+"</span>";
                     } else {
-                        return "<span class='label label-danger'>" + data + "</span>";
+                        return "<span class='badge badge-danger'>"+data+"</span>";
                     }
                 }
             },
-            { "defaultContent": "<button style='font-size:13px;' type='button' class='editar btn btn-primary'><i class='fa fa-edit'></i></button>" }
+            { "defaultContent": "<button style='font-size:13px;' type='button' class='desactivar btn btn-primary'><i class='fa fa-trash'></i></button>&nbsp;<button style='font-size:13px;' type='button' class='activar btn btn-success'><i class='fa fa-check'></i></button>" }
         ],
 
         "language": idioma_espanol,
@@ -117,8 +117,80 @@ function listar_usuario() {
     });
 
 }
+
+
+
 function filterGlobal() {
     $('#tabla_usuario').DataTable().search(
         $('#global_filter').val(),
     ).draw();
+}
+
+function abrirModalRegistro() {
+    $("#modal_registro").modal({ backdrop: 'static', keyboard: false })
+    $("#modal_registro").modal('show');
+}
+
+//listar el rol en el select2
+function listar_combo_rol() {
+    $.ajax({
+        "url": "../controller/usuario/combo_rol_listar.php",
+        type: 'POST'
+    }).done(function (resp) {
+        var data = JSON.parse(resp);
+        var cadena = "";
+        if (data.length > 0) {
+            for (var i = 0; i < data.length; i++) {
+                cadena += "<option value='" + data[i][0] + "'>" + data[i][1] + "</option>";
+            }
+            $("#cbm_rol").html(cadena);
+        } else {
+            cadena += "<option value=''>NO SE ENCONTRARON REGISTROS</option>";
+        }
+    })
+}
+
+function registrar_usuario() {
+    var usu = $("#txt_usu").val();
+    var contra = $("#txt_con1").val();
+    var contra2 = $("#txt_con2").val();
+    var sexo = $("#cbm_sexo").val();
+    var rol = $("#cbm_rol").val();
+    if (usu.length == 0 || contra.length == 0 || contra2.length == 0 || sexo.length == 0 || rol.length == 0) {
+        return Swal.fire("Mensaje de Advertencia", "Llene los campos que faltan", "warning");
+    }
+    if (contra != contra2) {
+        return Swal.fire("Mensaje de Advertencia", "Las Constraseñas no Coinciden", "warning");
+    }
+    $.ajax({
+        "url": "../controller/usuario/registro_usuario.php",
+        type: 'POST',
+        data: {
+            usuario: usu,
+            contrasena: contra,
+            sexo: sexo,
+            rol: rol
+        }
+    }).done(function (resp) {
+        alert(resp);
+        if (resp > 0) {
+            if (resp == 1) {
+                $("#modal_registro").modal('hide');
+                Swal.fire("Mensaje de Confirmacion", "Datos Correctos, Nuevo Usuario Ingresado", "success").then((value) => {
+                    limpiarRegistros();
+                    table.ajax.reload();
+                });
+            }else{
+                Swal.fire("Mensaje de Error", "Lo sentimos el nombre del usuario ya esta en la base de datos", "error");
+            }
+        } else {
+            Swal.fire("Mensaje de Error", "Lo sentimos no se pudo completar el registro", "error");
+        }
+    })
+}
+
+function limpiarRegistros(){
+    $("#txt_usu").val("");
+    $("#txt_con1").val("");
+    $("#txt_con2").val("");
 }
