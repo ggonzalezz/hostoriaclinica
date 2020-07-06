@@ -67,7 +67,16 @@
                 return 0;
             }
         }
-
+        // actualizar datos del usuario
+        
+        function editarUsuario($idusuario,$sexo, $rol){
+            $sql = "call sp_modificar_datos_usuario('$idusuario','$sexo','$rol')";
+            if($consulta = $this->conexion->conexion->query($sql)){
+                return 1;
+            }else{
+                return 0;
+            }
+        }
     }
 
 ?>

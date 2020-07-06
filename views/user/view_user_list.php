@@ -53,7 +53,7 @@
         <!-- /.card-body -->
     </div>
 </div>
-<!-- Inicio del Modal -->
+<!-- Inicio del Modal registro -->
 <form autocomplete="false" onsubmit="return false">
     <div class="modal fade" id="modal_registro" role="dialog">
         <div class="modal-dialog modal-sm">
@@ -102,7 +102,50 @@
         </div>
     </div>
 </form>
-<!-- Fin del Modal -->
+<!-- Fin del Modal  registro-->
+
+<!-- Inicio del Modal Ediar -->
+<form autocomplete="false" onsubmit="return false">
+    <div class="modal fade" id="modal_editar" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><b>Editar de Usuario</b></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-lg-12">
+                        <input type="text" id="txtidusuario" hidden>
+                        <label for="">Usuario</label>
+                        <input type="text" class="form-control" id="txt_usu_editar" placeholder="Ingrese Usuario" disabled>
+                        <br>
+                    </div>
+                   
+                    <div class="col-lg-12">
+                        <label for="">Sexo</label>
+                        <select class="js-example-basic-single" name="state" id="cbm_sexo_editar" style="height: 100%;width: 100%; ">
+                            <option value="M">MASCULINO</option>
+                            <option value="F">FEMENINO</option>
+                        </select>
+                        <br>
+                    </div>
+                    <div class="col-lg-12">
+                        <label for="">Rol</label>
+                        <select class="js-example-basic-single" name="state" id="cbm_rol_editar" style="height: 100%;width: 100%; ">
+
+                        </select>
+                        <br>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" onclick=" editar_usuario()">Modificar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- Fin del Modal  editar-->
 <script>
     $(document).ready(function() {
        

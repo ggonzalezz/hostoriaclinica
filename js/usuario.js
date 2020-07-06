@@ -102,7 +102,7 @@ function listar_usuario() {
                     }
                 }
             },
-            { "defaultContent": "<button style='font-size:13px;' type='button' class='desactivar btn btn-primary'><i class='fa fa-trash'></i></button>&nbsp;<button style='font-size:13px;' type='button' class='activar btn btn-success'><i class='fa fa-check'></i></button>" }
+            { "defaultContent": "<button style='font-size:13px;' type='button' class='editar btn btn-warning'><i class='fa fa-edit'></i></button>&nbsp;<button style='font-size:13px;' type='button' class='desactivar btn btn-primary'><i class='fa fa-trash'></i></button>&nbsp;<button style='font-size:13px;' type='button' class='activar btn btn-success'><i class='fa fa-check'></i></button>" }
         ],
 
         "language": idioma_espanol,
@@ -163,12 +163,29 @@ $('#tabla_usuario').on('click', '.activar', function () {
         }
     })
 })
+
+//Editar
+// se utiliza la clase editar
+$('#tabla_usuario').on('click', '.editar', function () {
+    var data = table.row($(this).parents('tr')).data();
+    if (table.row(this).child.isShown()) {
+        var data = table.row(this).data();
+    }
+    $("#modal_editar").modal({ backdrop: 'static', keyboard: false })
+    $("#modal_editar").modal('show');
+    $("#txtidusuario").val(data.idusuario);
+    $("#txt_usu_editar").val(data.nombreusu);
+    $("#cbm_sexo_editar").val(data.sexousu).trigger("change");
+    $("#cbm_rol_editar").val(data.idrol).trigger("change");
+
+})
+
 //actualizar estado del usuario
 function actualizar_estado(idusuario, estatus) {
     var mensaje = "";
-    if(estatus == 'INACTIVO'){
+    if (estatus == 'INACTIVO') {
         mensaje = "desactivado";
-    }else{
+    } else {
         mensaje = "activo";
     }
     $.ajax({
@@ -181,11 +198,11 @@ function actualizar_estado(idusuario, estatus) {
     }).done(function (resp) {
         alert(resp);
         if (resp > 0) {
-            Swal.fire("Mensaje de Confirmacion", "Usuario "+mensaje+" con exito", 
-            "success")
-            .then((value) => {
-                table.ajax.reload();
-            });
+            Swal.fire("Mensaje de Confirmacion", "Usuario " + mensaje + " con exito",
+                "success")
+                .then((value) => {
+                    table.ajax.reload();
+                });
         }
     })
 }
@@ -216,12 +233,16 @@ function listar_combo_rol() {
                 cadena += "<option value='" + data[i][0] + "'>" + data[i][1] + "</option>";
             }
             $("#cbm_rol").html(cadena);
+            $("#cbm_rol_editar").html(cadena);
         } else {
             cadena += "<option value=''>NO SE ENCONTRARON REGISTROS</option>";
+            $("#cbm_rol").html(cadena);
+            $("#cbm_rol_editar").html(cadena);
         }
     })
 }
 
+// registrar usuarios
 function registrar_usuario() {
     var usu = $("#txt_usu").val();
     var contra = $("#txt_con1").val();
@@ -260,7 +281,36 @@ function registrar_usuario() {
         }
     })
 }
-
+// editar usuarios
+function editar_usuario() {
+    var idusuario = $("#txtidusuario").val();
+    var sexo = $("#cbm_sexo_editar").val();
+    var rol = $("#cbm_rol_editar").val();
+    if (idusuario.length == 0 || sexo.length == 0 || rol.length == 0) {
+        return Swal.fire("Mensaje de Advertencia", "Llene los campos que faltan", "warning");
+    }
+    $.ajax({
+        "url": "../controller/usuario/editar_usuario.php",
+        type: 'POST',
+        data: {
+            idusuario: idusuario,
+            sexo: sexo,
+            rol: rol
+        }
+    }).done(function (resp) {
+        alert(resp);
+            if (resp == 1) {
+                $("#modal_editar").modal('hide');
+                Swal.fire("Mensaje de Confirmacion", "Datos Correctos, Usuario Modificado", "success").then((value) => {
+                    table.ajax.reload();
+                });
+           
+        } else {
+            Swal.fire("Mensaje de Error", "Lo sentimos no se pudo completar la modificacion", "error");
+        }
+    })
+}
+//limpiar registros
 function limpiarRegistros() {
     $("#txt_usu").val("");
     $("#txt_con1").val("");
