@@ -53,7 +53,7 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-    
+
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-dark navbar-dark">
             <!-- Left navbar links -->
@@ -87,14 +87,14 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
 
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="../plantilla/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                        <img id="img_nav" class="user-image" alt="User Image">
 
                         <span class="hidden-xs text-danger"><?php echo  $_SESSION['S_NOMBREUSU']; ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="../plantilla/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <img id="img_subnav" class="img-circle" alt="User Image">
                             <p>
                                 <?php echo  $_SESSION['S_NOMBREUSU']; ?>
                                 <small>Member since Nov. 2012</small>
@@ -102,9 +102,16 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
-                            <div class="pull-right">
-                                <a href="../controller/usuario/cerrar_session.php" class="btn btn-default btn-flat">Salir</a>
-                            </div>
+                            <a href="../controller/usuario/cerrar_session.php" class="dropdown-item">
+                                <i class="fas fa-arrow-left mr-2"></i> Salir
+                                <span class="float-right text-muted text-sm">ahora</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-users mr-2"></i> Configurar
+                                <span class="float-right text-muted text-sm">cuenta</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
                         </li>
                     </ul>
                 </li>
@@ -126,7 +133,7 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../plantilla/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                        <img id="img_lateral" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block"> <?php echo  $_SESSION['S_NOMBREUSU']; ?></a>
@@ -146,7 +153,7 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
                                 </p>
                             </a>
 
-  
+
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

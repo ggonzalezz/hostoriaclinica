@@ -7,6 +7,8 @@ require 'template/header.php';
 
     <!-- Main content -->
     <section class="content">
+        <input type="text" id="txtidprincipal" value="<?php echo $_SESSION['S_IDUSUARIO'] ?>" hidden>
+        <input type="text" id="usuarioprincipal" value="<?php echo $_SESSION['S_NOMBREUSU'] ?>" hidden>
         <div class="row" id="contenido_principal">
             <div class="col-md-12">
                 <div class="card card-success shadow-sm">

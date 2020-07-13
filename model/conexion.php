@@ -12,7 +12,7 @@ class conexion {
        $this->servidor = "localhost";
        $this->usuario ="root";
        $this->constrasena ="";
-       $this->db = "db_clinica"; 
+       $this->db = "db_historia_clinica"; 
     }
     function conectar(){
         $this->conexion = new mysqli($this->servidor, $this->usuario, $this->constrasena, $this->db);

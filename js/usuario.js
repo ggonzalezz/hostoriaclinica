@@ -298,8 +298,8 @@ function editar_usuario() {
             rol: rol
         }
     }).done(function (resp) {
-        alert(resp);
             if (resp == 1) {
+                traerDatosUsuario();
                 $("#modal_editar").modal('hide');
                 Swal.fire("Mensaje de Confirmacion", "Datos Correctos, Usuario Modificado", "success").then((value) => {
                     table.ajax.reload();
@@ -315,4 +315,30 @@ function limpiarRegistros() {
     $("#txt_usu").val("");
     $("#txt_con1").val("");
     $("#txt_con2").val("");
+}
+
+//traer datos usuario
+function traerDatosUsuario(){
+    var usuario = $("#usuarioprincipal").val();
+    $.ajax({
+        "url": "../controller/usuario/traer_datos_usuario.php",
+        type: 'POST',
+        data: {
+            usuario: usuario
+        }
+    }).done(function(resp){
+        var data = JSON.parse(resp);
+        if(data.length>0){
+           
+            if(data[0][3] == "M"){
+                $("#img_nav").attr("src","../plantilla/dist/img/medico.jpg");
+                $("#img_subnav").attr("src","../plantilla/dist/img/medico.jpg");
+                $("#img_lateral").attr("src","../plantilla/dist/img/medico.jpg");
+            }else{
+                $("#img_nav").attr("src","../plantilla/dist/img/medica.jpg");
+                $("#img_subnav").attr("src","../plantilla/dist/img/medica.jpg");
+                $("#img_lateral").attr("src","../plantilla/dist/img/medica.jpg");
+            }
+        }
+    })
 }

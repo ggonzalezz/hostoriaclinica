@@ -93,6 +93,12 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <!--=======================================ALERTAS JAVASCRIOT==========================================-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+<!--=======================================JS USUARIO==========================================-->
+<script src="../js/usuario.js"></script>
+<script>
+    traerDatosUsuario();
+</script>
 </body>
 
 
